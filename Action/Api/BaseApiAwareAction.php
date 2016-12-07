@@ -17,4 +17,13 @@ abstract class BaseApiAwareAction implements ActionInterface, GatewayAwareInterf
     {
         $this->apiClass = Api::class;
     }
+
+    /**
+     * @return Api
+     */
+    public function getApi()
+    {
+        return $this->api;
+    }
+
 }

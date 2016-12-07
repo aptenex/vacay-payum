@@ -1,6 +1,7 @@
 <?php
 namespace Aptenex\VacayPayum\Action;
 
+use Aptenex\VacayPayum\Constants;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Request\GetStatusInterface;
 use Payum\Core\Bridge\Spl\ArrayObject;
@@ -19,7 +20,49 @@ class StatusAction implements ActionInterface
 
         $model = ArrayObject::ensureArrayObject($request->getModel());
 
-        throw new \LogicException('Not implemented');
+        if ($model['meta']['errors']) {
+            $request->markFailed();
+
+            return;
+        }
+
+        if ($model['data']['refunded']) {
+            $request->markRefunded();
+
+            return;
+        }
+
+        if ($model['data']['status'] === Constants::STATUS_FAILED) {
+            $request->markFailed();
+
+            return;
+        }
+
+        if ($model['data']['status'] === Constants::STATUS_SUCCEEDED && $model['data']['paid']) {
+            $request->markCaptured();
+
+            return;
+        }
+
+        if ($model['data']['status'] === Constants::STATUS_PAID && $model['data']['paid']) {
+            $request->markCaptured();
+
+            return;
+        }
+
+        if ($model['data']['status'] === Constants::STATUS_SUCCEEDED && !$model['data']['captured']) {
+            $request->markAuthorized();
+
+            return;
+        }
+
+        if ($model['data']['status'] === Constants::STATUS_PAID && !$model['data']['captured']) {
+            $request->markAuthorized();
+
+            return;
+        }
+
+        $request->markUnknown();
     }
 
     /**

@@ -1,12 +1,11 @@
 <?php
 namespace Aptenex\VacayPayum;
 
+use Aptenex\VacayPayum\Action\Api\ObtainTokenAction;
 use Aptenex\VacayPayum\Action\AuthorizeAction;
 use Aptenex\VacayPayum\Action\CancelAction;
 use Aptenex\VacayPayum\Action\ConvertPaymentAction;
 use Aptenex\VacayPayum\Action\CaptureAction;
-use Aptenex\VacayPayum\Action\NotifyAction;
-use Aptenex\VacayPayum\Action\RefundAction;
 use Aptenex\VacayPayum\Action\StatusAction;
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\GatewayFactory;
@@ -22,12 +21,13 @@ class SkeletonGatewayFactory extends GatewayFactory
             'payum.factory_name' => 'VacayPay',
             'payum.factory_title' => 'VacayPay',
             'payum.action.capture' => new CaptureAction(),
-            'payum.action.authorize' => new AuthorizeAction(),
-            'payum.action.refund' => new RefundAction(),
-            'payum.action.cancel' => new CancelAction(),
-            'payum.action.notify' => new NotifyAction(),
             'payum.action.status' => new StatusAction(),
             'payum.action.convert_payment' => new ConvertPaymentAction(),
+            //'payum.action.get_credit_card_token' => new GetCreditCardTokenAction(),
+            'payum.action.obtain_token' => function (ArrayObject $config) {
+                return new ObtainTokenAction($config['payum.template.obtain_token']);
+            },
+            'payum.template.obtain_token' => '@PayumStripe/Action/obtain_js_token.html.twig',
         ]);
 
         if ($config['payum.api'] == false) {
@@ -41,5 +41,9 @@ class SkeletonGatewayFactory extends GatewayFactory
                 return new Api((array) $config, $config['payum.http_client'], $config['httplug.message_factory']);
             };
         }
+
+        $config['payum.paths'] = array_replace([
+            'VacayPayum' => __DIR__.'/Resources/views',
+        ], $config['payum.paths'] ?: []);
     }
 }

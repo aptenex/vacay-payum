@@ -7,18 +7,6 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Kotlyar Maksim",
-            "email": "kotlyar.maksim@gmail.com"
-        },
-        {
-            "name":     "Payum project",
-            "homepage": "http://payum.org/"
-        },
-        {
-            "name":     "Community contributions",
-            "homepage": "https://github.com/Payum/AuthorizeNetAim/contributors"
-        },
-        {
             "name":     "Sam Vaughton",
             "homepage": "https://github.com/samvaughton"
         }

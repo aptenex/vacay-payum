@@ -1,9 +1,9 @@
 {
-    "name": "payum/skeleton",
+    "name": "aptenex/vacay-payum",
     "type": "project",
-    "description": "The Payum extension. Rapid extensino development",
+    "description": "VacayPay Payum Library",
     "keywords": ["payment"],
-    "homepage": "http://payum.org",
+    "homepage": "https://www.rentivo.com",
     "license": "MIT",
     "authors": [
         {

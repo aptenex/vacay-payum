@@ -18,7 +18,7 @@ class SkeletonGatewayFactory extends GatewayFactory
     protected function populateConfig(ArrayObject $config)
     {
         $config->defaults([
-            'payum.factory_name' => 'VacayPay',
+            'payum.factory_name' => 'vacaypay',
             'payum.factory_title' => 'VacayPay',
             'payum.action.capture' => new CaptureAction(),
             'payum.action.status' => new StatusAction(),

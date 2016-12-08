@@ -10,7 +10,7 @@ use Aptenex\VacayPayum\Action\StatusAction;
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\GatewayFactory;
 
-class SkeletonGatewayFactory extends GatewayFactory
+class VacayPayumGatewayFactory extends GatewayFactory
 {
     /**
      * {@inheritDoc}

@@ -26,7 +26,9 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Aptenex\\VacayPayum": "" }
+        "psr-0": {
+            "Aptenex\\VacayPayum": "src/"
+        }
     },
     "extra": {
         "branch-alias": {

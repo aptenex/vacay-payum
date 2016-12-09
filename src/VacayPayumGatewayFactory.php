@@ -43,7 +43,7 @@ class VacayPayumGatewayFactory extends GatewayFactory
         }
 
         $config['payum.paths'] = array_replace([
-            'VacayPayum' => __DIR__.'/Resources/views',
+            'VacayPayum' => __DIR__ . '/Resources/views',
         ], $config['payum.paths'] ?: []);
     }
 }
